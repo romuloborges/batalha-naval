@@ -15,16 +15,20 @@ public class BatalhaServer extends UnicastRemoteObject implements IServer {
         this.clients = new ArrayList<>();
     }
 
-    public synchronized void registerClient(IClient client) throws RemoteException {
+    public void registerClient(IClient client) throws RemoteException {
         this.clients.add(client);
     }
 
-    public synchronized void broadcastMessage(Message message) throws RemoteException {
+    public void broadcastMessage(Message message) throws RemoteException {
         for(IClient client : this.clients) {
             if(!client.getId().equals(message.getId())) {
                 client.retrieveMessage(message.getNome() + ": " + message.getMessage());
             }
         }
+    }
+
+    public void disconectClient(IClient client) throws RemoteException {
+        this.clients.remove(client);
     }
     
 }

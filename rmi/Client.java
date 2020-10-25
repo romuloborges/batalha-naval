@@ -5,7 +5,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 import java.util.UUID;
 
-public class Client extends UnicastRemoteObject implements IClient, Runnable {
+public class Client extends UnicastRemoteObject implements IClient {
 
     private static final long serialVersionUID = 1L;
 
@@ -25,18 +25,33 @@ public class Client extends UnicastRemoteObject implements IClient, Runnable {
     }
 
     public void run() {
+        System.out.println("Para sair digite: exit");
         Scanner sc = new Scanner(System.in);
         String message;
         Message msg = new Message(this.name, "", this.id);
-        while(true) {
+        boolean continuar = true;
+        while(continuar) {
             message = sc.nextLine();
-            msg.setMessage(message);
-            try {
-                server.broadcastMessage(msg);
-            }  catch (RemoteException e) {
-                e.printStackTrace();
+            if(!message.equals("exit")) {
+                msg.setMessage(message);
+                try {
+                    server.broadcastMessage(msg);
+                }  catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                msg.setMessage("saindo!");
+                try {
+                    server.broadcastMessage(msg);
+                    server.disconectClient(this);
+                }  catch (RemoteException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Saindo ...");
+                continuar = false;
             }
         }
+        sc.close();
     }
 
     public UUID getId() throws RemoteException {
