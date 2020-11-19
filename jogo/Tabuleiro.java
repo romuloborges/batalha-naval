@@ -65,4 +65,26 @@ public class Tabuleiro {
         return saida;
     }
     
+    public boolean atacar(int linha, int coluna){
+        if(matriz[linha][coluna] >= 2){
+            System.out.println("Posição inválida! Um ataque já foi efetuado\n");
+            return false;
+        }
+        for(Embarcacao e : embarcacoes){
+            if(e.ataque(linha, coluna)){
+                if(e.getPecasValidas() == 0){
+                    System.out.println("Um "+e.toString()+" foi derrubado!\n");
+                    embarcacoes.remove(e);
+                }
+                //Ataque com sucesso recebem 2 na matriz
+                matriz[linha][coluna] = 2;
+                return true;
+            }    
+        }
+        
+        //Ataques falhos recebe 3 na matriz
+        matriz[linha][coluna] = 3;
+        return false;
+    }
+    
 }

@@ -14,5 +14,10 @@ public class Encouracado extends Embarcacao{
     public Encouracado(int linhaIni, int colunaIni, int linhaFim, int colunaFim) {
         super(4, linhaIni, colunaIni, linhaFim, colunaFim);
     }
+
+    @Override
+    public String toString() {
+        return "Encouraçado";
+    }
     
 }

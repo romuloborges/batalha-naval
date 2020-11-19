@@ -14,5 +14,12 @@ public class PortaAviao extends Embarcacao{
     public PortaAviao(int linhaIni, int colunaIni, int linhaFim, int colunaFim) {
         super(5, linhaIni, colunaIni, linhaFim, colunaFim);
     }
+
+    @Override
+    public String toString() {
+        return "Porta Avião";
+    }
+    
+    
     
 }

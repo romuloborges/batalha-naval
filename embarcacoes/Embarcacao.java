@@ -35,13 +35,15 @@ public abstract class Embarcacao {
     }
     
     public boolean ataque(int linha, int coluna){
-        if(this.posicaoInicio[0] == this.posicaoFim[0] && this.posicaoInicio[0] == linha && this.posicaoInicio[1] >= coluna && this.posicaoFim[1] <= coluna){
-            pecasValidas--;
-            return true;
-        }else if(this.posicaoInicio[0] != this.posicaoFim[0] && this.posicaoInicio[1] == coluna && this.posicaoInicio[0] >= linha && this.posicaoFim[0] <= linha){
-            pecasValidas--;
-            return true;
+        for(int i=this.getPosicaoInicio()[0]; i<=this.getPosicaoFim()[0]; i++){
+            for(int j=this.getPosicaoInicio()[1]; j<=this.getPosicaoFim()[1]; j++){
+                if(i==linha && j==coluna){
+                    pecasValidas--;
+                    return true;
+                }
+            }
         }
+
         return false;
     }
 

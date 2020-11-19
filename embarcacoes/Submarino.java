@@ -14,5 +14,12 @@ public class Submarino extends Embarcacao{
     public Submarino(int linhaIni, int colunaIni, int linhaFim, int colunaFim) {
         super(2, linhaIni, colunaIni, linhaFim, colunaFim);
     }
+
+    @Override
+    public String toString() {
+        return "Submarino";
+    }
+    
+    
     
 }
